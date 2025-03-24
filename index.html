@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Components</title>
-  <script src="tooltip.js"></script>
-</head>
-<body>
-  <p>Some text for the tooltip to attach to. <dev-tooltip></dev-tooltip></p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Components</title>
+    <script src="tooltip.js"></script>
+  </head>
+  <body>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam hendrerit
+      turpis eros, at tempus risus consectetur at. Praesent quis placerat lacus,
+      eu sodales tortor.
+      <dev-tooltip text="This is the tooltip text!"
+        >Some extra text</dev-tooltip
+      >
+      Maecenas urna ex, eleifend non eleifend vel, pharetra nec neque. Donec
+      dapibus eleifend nisi. Vivamus ullamcorper finibus tristique.
+    </p>
+  </body>
 </html>

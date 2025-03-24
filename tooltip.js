@@ -1,27 +1,51 @@
-class Tooltip extends HTMLElement{
-  constructor(){
-    super()
-    this.tooltipContainer;
+class Tooltip extends HTMLElement {
+  constructor() {
+    super();
+    this._tooltipContainer;
+    this._tooltipText = "default text";
+    this.attachShadow({
+      mode: "open"
+    });
+    this.shadowRoot.innerHTML = `
+    <style>
+      div{
+        background-color: black;
+        color: white;
+        position: absolute;
+        z-index: 10;
+        padding: 10px;
+      }
+
+      :host{
+        position: relative;
+      }
+    </style>
+    <slot></slot>
+    <span>(?)</span>
+    `;
   }
 
-  connectedCallback(){
-    const tooltipIcon = document.createElement('span')
-    tooltipIcon.textContent = '(?)'
-    tooltipIcon.addEventListener('mouseenter', this._showTooltip.bind(this))
-    tooltipIcon.addEventListener('mouseleave', this._hideTooltip.bind(this))
-    this.appendChild(tooltipIcon);
+  connectedCallback() {
+    if (this.hasAttribute("text")) {
+      this._tooltipText = this.getAttribute("text");
+    }
+
+    const tooltipIcon = this.shadowRoot.querySelector("span");
+    tooltipIcon.addEventListener("mouseenter", this._showTooltip.bind(this));
+    tooltipIcon.addEventListener("mouseleave", this._hideTooltip.bind(this));
+    tooltipIcon.style.color = "red";
+    this.shadowRoot.appendChild(tooltipIcon);
   }
 
-  _showTooltip(){
-    console.log(this);
-    this.tooltipContainer = document.createElement('div')
-    this.tooltipContainer.textContent = 'This is the tooltip text'
-    this.appendChild(this.tooltipContainer)
+  _showTooltip() {
+    this._tooltipContainer = document.createElement("div");
+    this._tooltipContainer.textContent = this._tooltipText;
+    this.shadowRoot.appendChild(this._tooltipContainer);
   }
-  
-  _hideTooltip(){
-    this.removeChild(this.tooltipContainer)
+
+  _hideTooltip() {
+    this.shadowRoot.removeChild(this._tooltipContainer);
   }
 }
 
-customElements.define('dev-tooltip', Tooltip)
+customElements.define("dev-tooltip", Tooltip);
