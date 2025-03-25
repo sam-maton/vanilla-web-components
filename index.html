@@ -7,20 +7,40 @@
     <script src="tooltip.js"></script>
     <script src="confirm-link.js"></script>
     <script src="info-button.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        --color-primary: green;
+        font-family: sans-serif;
+      }
+
+      body {
+        width: 50%;
+        margin: 0 auto;
+        padding-top: 10rem;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
-    <!-- <p>
+    <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam hendrerit
       turpis eros, at tempus risus consectetur at. Praesent quis placerat lacus,
       eu sodales tortor.
-      <dev-tooltip text="This is the tooltip text!"
-        >Some extra text</dev-tooltip
+      <dev-tooltip class="important" text="This is the tooltip text!"
+        ><span>Some extra text</span></dev-tooltip
       >
       Maecenas urna ex, eleifend non eleifend vel, pharetra nec neque. Donec
       dapibus eleifend nisi. Vivamus ullamcorper finibus tristique.
     </p>
 
-    <a href="#" is="dev-confirm-link">Testing</a> -->
-    <dev-info-button is-visible="true">Some info to show</dev-info-button>
+    <dev-tooltip text="This is the tooltip text!"
+      ><span>Main Tooltip text</span></dev-tooltip
+    >
+
+    <!--  <a href="#" is="dev-confirm-link">Testing</a> -->
+    <!-- <dev-info-button is-visible="true">Some info to show</dev-info-button> -->
   </body>
 </html>
