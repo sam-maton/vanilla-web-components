@@ -7,6 +7,7 @@
     <script src="tooltip.js"></script>
     <script src="confirm-link.js"></script>
     <script src="info-button.js"></script>
+    <script src="modal.js"></script>
     <style>
       * {
         box-sizing: border-box;
@@ -25,7 +26,12 @@
     </style>
   </head>
   <body>
-    <p>
+    <dev-modal id="modal">
+      <h1 slot="header">Modal Title</h1>
+      <p>With the confirmation you agree to pay the full amount.</p>
+    </dev-modal>
+    <button id="toggle-button">Open Modal</button>
+    <!-- <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam hendrerit
       turpis eros, at tempus risus consectetur at. Praesent quis placerat lacus,
       eu sodales tortor.
@@ -38,9 +44,26 @@
 
     <dev-tooltip text="This is the tooltip text!"
       ><span>Main Tooltip text</span></dev-tooltip
-    >
+    > -->
 
     <!--  <a href="#" is="dev-confirm-link">Testing</a> -->
     <!-- <dev-info-button is-visible="true">Some info to show</dev-info-button> -->
+
+    <script>
+      const button = document.querySelector('#toggle-button');
+      const modal = document.querySelector('#modal');
+
+      modal.addEventListener('confirm', () => {
+        console.log('Confirmed!');
+      });
+
+      modal.addEventListener('cancel', () => {
+        console.log('Cancelled!');
+      });
+
+      button.addEventListener('click', () => {
+        modal.open();
+      });
+    </script>
   </body>
 </html>

@@ -2,7 +2,7 @@ class Tooltip extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({
-      mode: "open"
+      mode: 'open'
     });
     this.shadowRoot.innerHTML = `
     <style>
@@ -47,8 +47,8 @@ class Tooltip extends HTMLElement {
     <span class="icon">?</span>
     `;
 
-    this._tooltipIcon = this.shadowRoot.querySelector(".icon");
-    this._tooltipText = "default text";
+    this._tooltipIcon = this.shadowRoot.querySelector('.icon');
+    this._tooltipText = 'default text';
     this._tooltipVisible = false;
 
     this._showTooltip = this._showTooltip.bind(this);
@@ -56,37 +56,37 @@ class Tooltip extends HTMLElement {
   }
 
   connectedCallback() {
-    if (this.hasAttribute("text")) {
-      this._tooltipText = this.getAttribute("text");
+    if (this.hasAttribute('text')) {
+      this._tooltipText = this.getAttribute('text');
     }
 
-    this._tooltipIcon.addEventListener("mouseenter", this._showTooltip);
-    this._tooltipIcon.addEventListener("mouseleave", this._hideTooltip);
+    this._tooltipIcon.addEventListener('mouseenter', this._showTooltip);
+    this._tooltipIcon.addEventListener('mouseleave', this._hideTooltip);
   }
 
-  static observedAttributes = ["text"];
+  static observedAttributes = ['text'];
   attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue === newValue) {
       return;
     }
 
-    if (name === "text") {
+    if (name === 'text') {
       this._tooltipText = newValue;
     }
   }
 
   disconnectedCallback() {
-    this._tooltipIcon.removeEventListener("mouseenter", this._showTooltip);
-    this._tooltipIcon.removeEventListener("mouseleave", this._hideTooltip);
-    console.log("finished removing listeners");
+    this._tooltipIcon.removeEventListener('mouseenter', this._showTooltip);
+    this._tooltipIcon.removeEventListener('mouseleave', this._hideTooltip);
+    console.log('finished removing listeners');
   }
 
   _render() {
-    let tooltipContainer = this.shadowRoot.querySelector(".container");
+    let tooltipContainer = this.shadowRoot.querySelector('.container');
 
     if (this._tooltipVisible) {
-      tooltipContainer = document.createElement("div");
-      tooltipContainer.classList.add("container");
+      tooltipContainer = document.createElement('div');
+      tooltipContainer.classList.add('container');
       tooltipContainer.textContent = this._tooltipText;
       this.shadowRoot.appendChild(tooltipContainer);
     } else {
@@ -107,4 +107,4 @@ class Tooltip extends HTMLElement {
   }
 }
 
-customElements.define("dev-tooltip", Tooltip);
+customElements.define('dev-tooltip', Tooltip);
